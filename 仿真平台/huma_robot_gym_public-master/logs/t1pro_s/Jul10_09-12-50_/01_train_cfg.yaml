@@ -1,0 +1,39 @@
+algorithm:
+  class_name: PPO
+  clip_param: 0.2
+  desired_kl: 0.008
+  entropy_coef: 0.005
+  gamma: 0.994
+  lam: 0.95
+  learning_rate: 1.0e-05
+  max_grad_norm: 1.0
+  num_learning_epochs: 2
+  num_mini_batches: 4
+  schedule: adaptive
+  use_clipped_value_loss: true
+  value_loss_coef: 1.0
+empirical_normalization: false
+init_member_classes: {}
+num_steps_per_env: 60
+policy:
+  actor_hidden_dims:
+  - 512
+  - 256
+  - 128
+  class_name: ActorCritic
+  critic_hidden_dims:
+  - 768
+  - 256
+  - 128
+  init_noise_std: 1.0
+runner:
+  checkpoint: -1
+  experiment_name: t1pro_s
+  load_run: -1
+  max_iterations: 20001
+  resume: false
+  resume_path: null
+  run_name: ''
+runner_class_name: OnPolicyRunner
+save_interval: 100
+seed: 5

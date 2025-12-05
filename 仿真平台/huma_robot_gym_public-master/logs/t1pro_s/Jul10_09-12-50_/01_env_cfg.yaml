@@ -1,0 +1,453 @@
+asset:
+  angular_damping: 0.0
+  ankle_p_armature: 0.9
+  ankle_p_damping: 12.0
+  ankle_p_friction: 1.0
+  ankle_r_armature: 0.45
+  ankle_r_damping: 3.0
+  ankle_r_friction: 1.0
+  armature: 0.1
+  collapse_fixed_joints: true
+  default_dof_drive_mode: 3
+  density: 0.001
+  disable_gravity: false
+  file: /home/ubuntu/data/gitlab/test0708/huma_robot_gym_public/huma_robot_gym_public/resources/robots/T1Bot/train_asset/t1pro_Jul10_09-12-50_.urdf
+  fix_base_link: false
+  flip_visual_attachments: false
+  foot_name: ankle_pitch
+  hip_p_armature: 2.5
+  hip_p_damping: 17.5
+  hip_p_friction: 0.08
+  hip_r_armature: 2.3
+  hip_r_damping: 15.0
+  hip_r_friction: 0.04
+  hip_y_armature: 1.3
+  hip_y_damping: 2.5
+  hip_y_friction: 0.08
+  knee_armature: 1.6
+  knee_damping: 6.5
+  knee_friction: 0.085
+  knee_name: knee
+  linear_damping: 0.0
+  max_angular_velocity: 1000.0
+  max_linear_velocity: 1000.0
+  mjcf_file: /home/ubuntu/data/gitlab/test0708/huma_robot_gym_public/huma_robot_gym_public/resources/robots/T1Bot/train_asset/t1pro_Jul10_09-12-50_.xml
+  name: t1pro_s
+  penalize_contacts_on:
+  - base_link
+  pos_soft_limit_range_scale: 0.9
+  replace_cylinder_with_capsule: false
+  self_collisions: 0
+  terminate_after_contacts_on:
+  - base_link
+  test_gait:
+    cycle_time: 1.5
+    joint_ids:
+    - 0
+    - 6
+    offset: 0.2
+    pp: 0.15
+    signal_type: 1
+  test_mode: false
+  thickness: 0.01
+commands:
+  curriculum: true
+  heading_command: true
+  max_curriculum: 1.0
+  num_commands: 4
+  ranges:
+    ang_vel_yaw:
+    - -1.0
+    - 1.0
+    heading:
+    - -3.14
+    - 3.14
+    lin_vel_x:
+    - -0.5
+    - 1.0
+    lin_vel_y:
+    - -0.5
+    - 0.5
+  resampling_time: 8.0
+control:
+  action_scale: 0.25
+  damping:
+    ankle_pitch: 3.5
+    ankle_roll: 3.0
+    hip_pitch: 75.0
+    hip_roll: 12.0
+    hip_yaw: 7.5
+    knee: 20.0
+  decimation: 4
+  stiffness:
+    ankle_pitch: 310.0
+    ankle_roll: 130
+    hip_pitch: 1450.0
+    hip_roll: 325.0
+    hip_yaw: 200.0
+    knee: 550.0
+domain_rand:
+  action_delay: 0.5
+  action_noise: 0.02
+  add_cmd_action_latency: true
+  add_obs_latency: true
+  added_body_com_range:
+  - -0.06
+  - 0.06
+  added_leg_com_range:
+  - -0.05
+  - 0.05
+  added_mass_range:
+  - -5.0
+  - 5.0
+  cycle_time_range:
+  - 0.8
+  - 0.8
+  damping_multiplier_range:
+  - 0.8
+  - 1.2
+  default_joint_angles_range:
+    leg_left_ankle_pitch_joint:
+    - -0.1
+    - 0.1
+    leg_left_ankle_roll_joint:
+    - -0.1
+    - 0.1
+    leg_left_hip_pitch_joint:
+    - -0.1
+    - 0.1
+    leg_left_hip_roll_joint:
+    - -0.1
+    - 0.1
+    leg_left_hip_yaw_joint:
+    - -0.1
+    - 0.1
+    leg_left_knee_joint:
+    - -0.1
+    - 0.1
+    leg_right_ankle_pitch_joint:
+    - -0.1
+    - 0.1
+    leg_right_ankle_roll_joint:
+    - -0.1
+    - 0.1
+    leg_right_hip_pitch_joint:
+    - -0.1
+    - 0.1
+    leg_right_hip_roll_joint:
+    - -0.1
+    - 0.1
+    leg_right_hip_yaw_joint:
+    - -0.1
+    - 0.1
+    leg_right_knee_joint:
+    - -0.1
+    - 0.1
+  dof_armature_range:
+  - -0.2
+  - 0.2
+  dof_damping_range:
+  - -0.2
+  - 0.2
+  dof_friction_range:
+  - -0.2
+  - 0.2
+  friction_range:
+  - 0.2
+  - 2.0
+  max_push_ang_vel: 0.3
+  max_push_vel_xy: 0.6
+  motor_zero_offset_range:
+  - -0.035
+  - 0.035
+  multiplied_link_mass_range:
+  - 0.8
+  - 1.2
+  push_curriculum_common_step: 600000
+  push_curriculum_start_step: 120000
+  push_duration: 1
+  push_interval: 601.0
+  push_interval_s: 12
+  push_robots: true
+  randomize_base_mass: true
+  randomize_body_com: true
+  randomize_body_inertia: true
+  randomize_calculated_torque: true
+  randomize_cmd_action_latency: true
+  randomize_cycle_time: true
+  randomize_dof_armature: true
+  randomize_dof_damping: true
+  randomize_dof_friction: true
+  randomize_friction: true
+  randomize_link_mass: true
+  randomize_motor_zero_offset: true
+  randomize_obs_imu_latency: true
+  randomize_obs_motor_latency: true
+  randomize_pd_gains: true
+  randomize_phase: false
+  randomize_restitution: true
+  range_cmd_action_latency:
+  - 1
+  - 10
+  range_obs_imu_latency:
+  - 1
+  - 10
+  range_obs_motor_latency:
+  - 1
+  - 10
+  restitution_range:
+  - 0.0
+  - 0.4
+  scaled_body_inertia_range:
+  - 0.9
+  - 1.1
+  stiffness_multiplier_range:
+  - 0.8
+  - 1.2
+  torque_multiplier_range:
+  - 0.8
+  - 1.2
+  use_command_cycle_time: false
+env:
+  c_frame_stack: 3
+  env_spacing: 3.0
+  episode_length_s: 24
+  frame_stack: 15
+  num_actions: 12
+  num_envs: 8192
+  num_observations: 750
+  num_privileged_obs: 228
+  num_single_obs: 50
+  send_timeouts: true
+  single_num_privileged_obs: 76
+init_member_classes: {}
+init_state:
+  ang_vel:
+  - 0.0
+  - 0.0
+  - 0.0
+  default_joint_angles:
+    leg_left_ankle_pitch_joint: 0.0
+    leg_left_ankle_roll_joint: 0.0
+    leg_left_hip_pitch_joint: 0.0
+    leg_left_hip_roll_joint: 0.0
+    leg_left_hip_yaw_joint: 0.0
+    leg_left_knee_joint: 0.0
+    leg_right_ankle_pitch_joint: 0.0
+    leg_right_ankle_roll_joint: 0.0
+    leg_right_hip_pitch_joint: 0.0
+    leg_right_hip_roll_joint: 0.0
+    leg_right_hip_yaw_joint: 0.0
+    leg_right_knee_joint: 0.0
+  lin_vel:
+  - 0.0
+  - 0.0
+  - 0.0
+  pos:
+  - 0.0
+  - 0.0
+  - 0.91
+  rot:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+noise:
+  add_noise: true
+  noise_increasing_steps: 5000
+  noise_scales:
+    ang_vel: 0.1
+    dof_pos: 0.05
+    dof_vel: 0.5
+    imu: 0.03
+    lin_vel: 0.05
+normalization:
+  clip_actions: 100.0
+  clip_observations: 100.0
+  obs_scales:
+    ang_vel: 1.0
+    dof_pos: 1.0
+    dof_vel: 0.05
+    imu: 1.0
+    lin_vel: 1.0
+rewards:
+  base_height_target: 0.87
+  cycle_time: 0.8
+  double_support_threshold: 0.3
+  max_contact_force: 500
+  max_dist: 1.0
+  min_dist: 0.16
+  only_positive_rewards: true
+  scales:
+    action_smoothness: -0.003
+    collision: -1.0
+    default_joint_pos: 1.0
+    dof_acc: -1.0e-07
+    dof_pos_limits: -10.0
+    dof_vel: -5.0e-06
+    feet_clearance: 1.5
+    feet_contact_forces_v2: -0.002
+    feet_contact_number: 1.2
+    feet_distance: 0.2
+    feet_orientation: 0.5
+    feet_stumble: -1.25
+    foot_slip: -0.01
+    joint_pos: 1.6
+    joint_power: -2.0e-05
+    knee_torques: 1.0
+    orientation: 1.0
+    torques: -1.0e-07
+    torques_limits: -0.001
+    tracking_ang_vel: 1.8
+    tracking_lin_vel: 1.2
+    zero_stand: 2.0
+  soft_dof_vel_limit: 1.0
+  soft_torque_limit: 1.0
+  target_feet_height: 0.04
+  target_joint_pos_scale: 0.35
+  target_joint_pos_scale_knee: 0.6
+  tracking_sigma: 5
+safety:
+  pos_limit: 1.0
+  torque_limit: 0.85
+  vel_limit: 1.0
+seed: 5
+sim:
+  dt: 0.005
+  gravity:
+  - 0.0
+  - 0.0
+  - -9.81
+  physx:
+    bounce_threshold_velocity: 0.5
+    contact_collection: 2
+    contact_offset: 0.01
+    default_buffer_size_multiplier: 5
+    max_depenetration_velocity: 1.0
+    max_gpu_contact_pairs: 16777216
+    num_position_iterations: 4
+    num_threads: 10
+    num_velocity_iterations: 0
+    rest_offset: 0.0
+    solver_type: 1
+  substeps: 1
+  up_axis: 1
+terrain:
+  all_vertical: false
+  border_size: 5
+  curriculum: false
+  downsampled_scale: 0.075
+  dynamic_friction: 1.0
+  edge_width_thresh: 0.05
+  gap_size:
+  - 0.02
+  - 0.1
+  height:
+  - 0
+  - 0.04
+  hf2mesh_method: grid
+  horizontal_scale: 0.1
+  horizontal_scale_camera: 0.1
+  max_error: 0.1
+  max_error_camera: 2
+  max_init_terrain_level: 5
+  measure_heights: false
+  measure_horizontal_noise: 0.0
+  measured_points_x:
+  - -0.45
+  - -0.3
+  - -0.15
+  - 0
+  - 0.15
+  - 0.3
+  - 0.45
+  - 0.6
+  - 0.75
+  - 0.9
+  - 1.05
+  - 1.2
+  measured_points_y:
+  - -0.75
+  - -0.6
+  - -0.45
+  - -0.3
+  - -0.15
+  - 0.0
+  - 0.15
+  - 0.3
+  - 0.45
+  - 0.6
+  - 0.75
+  mesh_type: plane
+  no_flat: true
+  num_cols: 40
+  num_goals: 8
+  num_rows: 10
+  origin_zero_z: true
+  restitution: 0.0
+  selected: false
+  simplify_grid: false
+  slope_treshold: 1.5
+  static_friction: 1.0
+  stepping_stone_distance:
+  - 0.02
+  - 0.08
+  terrain_dict:
+    demo: 0.0
+    discrete: 0.0
+    gaps: 0.0
+    large stairs down: 0.0
+    large stairs up: 0.0
+    parkour: 0.0
+    parkour_flat: 0.05
+    parkour_gap: 0.2
+    parkour_hurdle: 0.0
+    parkour_step: 0.2
+    pit: 0.0
+    platform: 0.0
+    rough slope down: 0.0
+    rough slope up: 0.0
+    rough stairs down: 0.0
+    rough stairs up: 0.0
+    smooth flat: 0
+    smooth slope: 0.0
+    stepping stones: 0.0
+    wall: 0.0
+  terrain_kwargs: null
+  terrain_length: 18.0
+  terrain_proportions:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.05
+  - 0.2
+  - 0.2
+  - 0.0
+  terrain_width: 4
+  vertical_scale: 0.005
+  y_range:
+  - -0.4
+  - 0.4
+viewer:
+  lookat:
+  - 11.0
+  - 5
+  - 3.0
+  pos:
+  - 10
+  - 0
+  - 6
+  ref_env: 0
