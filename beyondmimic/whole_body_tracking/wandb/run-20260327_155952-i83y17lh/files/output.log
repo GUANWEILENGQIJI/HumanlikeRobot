@@ -1,0 +1,57 @@
+[INFO]: Logging motion to wandb: obstaclcle1_subject1
+[34m[1mwandb[0m: [32m[41mERROR[0m HTTP 404: cannot create registry. custom registries can only be created via the registries ui
+Traceback (most recent call last):
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/apis/normalize.py", line 28, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/sdk/artifacts/artifact.py", line 2479, in link
+    data = client.execute(gql_op, variable_values=gql_vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/apis/public/api.py", line 111, in execute
+    return self._execute_decorated(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/sdk/lib/retry.py", line 319, in wrapped_fn
+    return retrier(*args, **kargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/sdk/lib/retry.py", line 157, in __call__
+    result = self._call_fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/apis/public/api.py", line 123, in _wrapped
+    return self._client.execute(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/sdk/lib/gql_request.py", line 71, in execute
+    request.raise_for_status()
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.wandb.ai/graphql
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jvv/GuoYuchen/beyondmimic/whole_body_tracking/scripts/csv_to_npz.py", line 389, in <module>
+    main()
+  File "/home/jvv/GuoYuchen/beyondmimic/whole_body_tracking/scripts/csv_to_npz.py", line 341, in main
+    run_simulator(
+  File "/home/jvv/GuoYuchen/beyondmimic/whole_body_tracking/scripts/csv_to_npz.py", line 323, in run_simulator
+    run.link_artifact(artifact=logged_artifact, target_path=f"wandb-registry-{REGISTRY}/{COLLECTION}")
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 458, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 445, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 3011, in link_artifact
+    return artifact.link(target.to_str(), aliases)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jvv/anaconda3/envs/isaacsim-env/lib/python3.11/site-packages/wandb/apis/normalize.py", line 45, in wrapper
+    raise CommError(message, error)
+wandb.errors.errors.CommError: HTTP 404: cannot create registry. custom registries can only be created via the registries ui

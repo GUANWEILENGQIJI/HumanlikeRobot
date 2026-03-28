@@ -1,0 +1,50 @@
+{
+  "os": "Linux-6.8.0-106-generic-x86_64-with-glibc2.35",
+  "python": "CPython 3.11.14",
+  "startedAt": "2026-03-27T08:42:51.390815Z",
+  "args": [
+    "--input_file",
+    "/home/jvv/GuoYuchen/robotics/GMR-master/result/csv/walk2_subject3.csv",
+    "--input_fps",
+    "30",
+    "--output_name",
+    "obstaclcle1_subject1",
+    "--root_z_offset",
+    "0.0"
+  ],
+  "program": "/home/jvv/GuoYuchen/beyondmimic/whole_body_tracking/scripts/csv_to_npz.py",
+  "codePath": "scripts/csv_to_npz.py",
+  "codePathLocal": "scripts/csv_to_npz.py",
+  "git": {
+    "remote": "https://github.com/HybridRobotics/whole_body_tracking.git",
+    "commit": "cd65172032893724b445448818c34165846d847d"
+  },
+  "email": "yuchenguo2005111@gmail.com",
+  "root": "/home/jvv/GuoYuchen/beyondmimic/whole_body_tracking",
+  "host": "jvv-CandyJet",
+  "executable": "/home/jvv/anaconda3/envs/isaacsim-env/bin/python",
+  "cpu_count": 24,
+  "cpu_count_logical": 32,
+  "gpu": "NVIDIA GeForce RTX 5090 D v2",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "279296987136",
+      "used": "30383140864"
+    }
+  },
+  "memory": {
+    "total": "33424941056"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 5090 D v2",
+      "memoryTotal": "25642926080",
+      "cudaCores": 21760,
+      "architecture": "Blackwell",
+      "uuid": "GPU-a99d3b4c-3870-9426-7505-dcb869af83d4"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "writerId": "riap82ukdzswxppm1rnau2k6ivs7f9hd"
+}

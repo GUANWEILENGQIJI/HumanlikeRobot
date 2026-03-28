@@ -1,0 +1,60 @@
+_wandb:
+    value:
+        cli_version: 0.24.0
+        e:
+            uqsl9m23198pmk6jotrx5m76i09md1mw:
+                args:
+                    - --input_file
+                    - /home/jvv/GuoYuchen/robotics/GMR-master/result/csv/walk2_subject3.csv
+                    - --input_fps
+                    - "30"
+                    - --output_name
+                    - obstaclcle1_subject1
+                    - --root_z_offset
+                    - "0.0"
+                codePath: scripts/csv_to_npz.py
+                codePathLocal: scripts/csv_to_npz.py
+                cpu_count: 24
+                cpu_count_logical: 32
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "279296987136"
+                        used: "29538979840"
+                email: yuchenguo2005111@gmail.com
+                executable: /home/jvv/anaconda3/envs/isaacsim-env/bin/python
+                git:
+                    commit: cd65172032893724b445448818c34165846d847d
+                    remote: https://github.com/HybridRobotics/whole_body_tracking.git
+                gpu: NVIDIA GeForce RTX 5090 D v2
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Blackwell
+                      cudaCores: 21760
+                      memoryTotal: "25642926080"
+                      name: NVIDIA GeForce RTX 5090 D v2
+                      uuid: GPU-a99d3b4c-3870-9426-7505-dcb869af83d4
+                host: jvv-CandyJet
+                memory:
+                    total: "33424941056"
+                os: Linux-6.8.0-106-generic-x86_64-with-glibc2.35
+                program: /home/jvv/GuoYuchen/beyondmimic/whole_body_tracking/scripts/csv_to_npz.py
+                python: CPython 3.11.14
+                root: /home/jvv/GuoYuchen/beyondmimic/whole_body_tracking
+                startedAt: "2026-03-27T06:12:33.084843Z"
+                writerId: uqsl9m23198pmk6jotrx5m76i09md1mw
+        m: []
+        python_version: 3.11.14
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+            "4": 3.11.14
+            "5": 0.24.0
+            "12": 0.24.0
+            "13": linux-x86_64

@@ -1,0 +1,212 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   scripts/csv_to_npz.py
+	modified:   scripts/rsl_rl/train.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	source/whole_body_tracking/whole_body_tracking/robots/T1Bot/
+	source/whole_body_tracking/whole_body_tracking/robots/t1pro.py
+	source/whole_body_tracking/whole_body_tracking/robots/t1pro_pose_stand.json
+	source/whole_body_tracking/whole_body_tracking/robots/view_t1pro_pose.py
+	source/whole_body_tracking/whole_body_tracking/tasks/tracking/config/t1pro/
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/scripts/csv_to_npz.py b/scripts/csv_to_npz.py
+index 7c6b938..d922943 100644
+--- a/scripts/csv_to_npz.py
++++ b/scripts/csv_to_npz.py
+@@ -30,6 +30,15 @@ parser.add_argument(
+ )
+ parser.add_argument("--output_name", type=str, required=True, help="The name of the motion npz file.")
+ parser.add_argument("--output_fps", type=int, default=50, help="The fps of the output motion.")
++parser.add_argument(
++    "--root_z_offset",
++    type=float,
++    default=0.0,
++    help=(
++        "Constant offset subtracted from the root z position before replay/export. "
++        "Use a positive value if the robot appears to float above the ground."
++    ),
++)
+ 
+ # append AppLauncher cli args
+ AppLauncher.add_app_launcher_args(parser)
+@@ -55,7 +64,7 @@ from isaaclab.utils.math import axis_angle_from_quat, quat_conjugate, quat_mul,
+ ##
+ # Pre-defined configs
+ ##
+-from whole_body_tracking.robots.g1 import G1_CYLINDER_CFG
++from whole_body_tracking.robots.t1pro import T1PRO_CFG
+ 
+ 
+ @configclass
+@@ -75,7 +84,7 @@ class ReplayMotionsSceneCfg(InteractiveSceneCfg):
+     )
+ 
+     # articulation
+-    robot: ArticulationCfg = G1_CYLINDER_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
++    robot: ArticulationCfg = T1PRO_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
+ 
+ 
+ class MotionLoader:
+@@ -114,13 +123,17 @@ class MotionLoader:
+             )
+         motion = motion.to(torch.float32).to(self.device)
+         self.motion_base_poss_input = motion[:, :3]
++        self.motion_base_poss_input[:, 2] -= args_cli.root_z_offset
+         self.motion_base_rots_input = motion[:, 3:7]
+         self.motion_base_rots_input = self.motion_base_rots_input[:, [3, 0, 1, 2]]  # convert to wxyz
+         self.motion_dof_poss_input = motion[:, 7:]
+ 
+         self.input_frames = motion.shape[0]
+         self.duration = (self.input_frames - 1) * self.input_dt
+-        print(f"Motion loaded ({self.motion_file}), duration: {self.duration} sec, frames: {self.input_frames}")
++        print(
++            f"Motion loaded ({self.motion_file}), duration: {self.duration} sec, frames: {self.input_frames}, "
++            f"root_z_offset: {args_cli.root_z_offset}"
++        )
+ 
+     def _interpolate_motion(self):
+         """Interpolates the motion to the output fps."""
+@@ -329,35 +342,44 @@ def main():
+         sim,
+         scene,
+         joint_names=[
+-            "left_hip_pitch_joint",
+-            "left_hip_roll_joint",
+-            "left_hip_yaw_joint",
+-            "left_knee_joint",
+-            "left_ankle_pitch_joint",
+-            "left_ankle_roll_joint",
+-            "right_hip_pitch_joint",
+-            "right_hip_roll_joint",
+-            "right_hip_yaw_joint",
+-            "right_knee_joint",
+-            "right_ankle_pitch_joint",
+-            "right_ankle_roll_joint",
+-            "waist_yaw_joint",
+-            "waist_roll_joint",
+-            "waist_pitch_joint",
+-            "left_shoulder_pitch_joint",
+-            "left_shoulder_roll_joint",
+-            "left_shoulder_yaw_joint",
+-            "left_elbow_joint",
+-            "left_wrist_roll_joint",
+-            "left_wrist_pitch_joint",
+-            "left_wrist_yaw_joint",
+-            "right_shoulder_pitch_joint",
+-            "right_shoulder_roll_joint",
+-            "right_shoulder_yaw_joint",
+-            "right_elbow_joint",
+-            "right_wrist_roll_joint",
+-            "right_wrist_pitch_joint",
+-            "right_wrist_yaw_joint",
++		"leg_right_hip_yaw_joint",
++		  "leg_right_hip_roll_joint",
++		  "leg_right_hip_pitch_joint",
++		  "leg_right_knee_joint",
++		 
++		  "leg_right_ankle_roll_joint",
++		  "leg_right_ankle_pitch_joint",
++		  "leg_left_hip_yaw_joint",
++		  "leg_left_hip_roll_joint",
++		  "leg_left_hip_pitch_joint",
++		  "leg_left_knee_joint",
++		 
++		  "leg_left_ankle_roll_joint",
++		  "leg_left_ankle_pitch_joint",
++		  "torso_yaw_joint",
++		  "torso_roll_joint",
++		  "torso_pitch_joint",
++		  "arm_right_shoulder_hunch_joint",
++		  "arm_right_shoulder_pitch_joint",
++		  "arm_right_shoulder_roll_joint",
++		  "arm_right_shoulder_yaw_joint",
++		  "arm_right_elbow_joint",
++		  "arm_right_wrist_roll_joint",
++		  "arm_right_wrist_yaw_joint",
++		  "arm_right_wrist_pitch_joint",
++		  "arm_left_shoulder_hunch_joint",
++		  "arm_left_shoulder_pitch_joint",
++		  "arm_left_shoulder_roll_joint",
++		  "arm_left_shoulder_yaw_joint",
++		  "arm_left_elbow_joint",
++		  "arm_left_wrist_roll_joint",
++		  "arm_left_wrist_yaw_joint",
++		  "arm_left_wrist_pitch_joint",
++		  "neck_roll_joint",
++		  "neck_pitch_joint",
++		  "head_roll_joint",
++		  "head_pitch_joint",
++		  "head_yaw_joint",
+         ],
+     )
+ 
+@@ -367,3 +389,4 @@ if __name__ == "__main__":
+     main()
+     # close sim app
+     simulation_app.close()
++
+diff --git a/scripts/rsl_rl/train.py b/scripts/rsl_rl/train.py
+index c9fd5f8..31dfa6e 100644
+--- a/scripts/rsl_rl/train.py
++++ b/scripts/rsl_rl/train.py
+@@ -24,7 +24,8 @@ parser.add_argument("--num_envs", type=int, default=None, help="Number of enviro
+ parser.add_argument("--task", type=str, default=None, help="Name of the task.")
+ parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
+ parser.add_argument("--max_iterations", type=int, default=None, help="RL Policy training iterations.")
+-parser.add_argument("--registry_name", type=str, required=True, help="The name of the wand registry.")
++parser.add_argument("--registry_name", type=str, default=None, help="The name of the wand registry.")
++parser.add_argument("--motion_file", type=str, default=None, help="Local path to a motion npz file.")
+ 
+ # append RSL-RL cli arguments
+ cli_args.add_rsl_rl_args(parser)
+@@ -88,17 +89,24 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+     env_cfg.seed = agent_cfg.seed
+     env_cfg.sim.device = args_cli.device if args_cli.device is not None else env_cfg.sim.device
+ 
+-    # load the motion file from the wandb registry
++    # load the motion file from local disk or wandb registry
+     registry_name = args_cli.registry_name
+-    if ":" not in registry_name:  # Check if the registry name includes alias, if not, append ":latest"
+-        registry_name += ":latest"
+-    import pathlib
+-
+-    import wandb
+-
+-    api = wandb.Api()
+-    artifact = api.artifact(registry_name)
+-    env_cfg.commands.motion.motion_file = str(pathlib.Path(artifact.download()) / "motion.npz")
++    if args_cli.motion_file is not None:
++        env_cfg.commands.motion.motion_file = os.path.abspath(args_cli.motion_file)
++        print(f"[INFO]: Using local motion file: {env_cfg.commands.motion.motion_file}")
++    else:
++        if registry_name is None:
++            raise ValueError("Either --motion_file or --registry_name must be provided.")
++        if ":" not in registry_name:  # Check if the registry name includes alias, if not, append ":latest"
++            registry_name += ":latest"
++        import pathlib
++
++        import wandb
++
++        api = wandb.Api()
++        artifact = api.artifact(registry_name)
++        env_cfg.commands.motion.motion_file = str(pathlib.Path(artifact.download()) / "motion.npz")
++        print(f"[INFO]: Downloaded motion file from wandb: {env_cfg.commands.motion.motion_file}")
+ 
+     # specify directory for logging experiments
+     log_root_path = os.path.join("logs", "rsl_rl", agent_cfg.experiment_name)
+@@ -163,3 +171,4 @@ if __name__ == "__main__":
+     main()
+     # close sim app
+     simulation_app.close()
++

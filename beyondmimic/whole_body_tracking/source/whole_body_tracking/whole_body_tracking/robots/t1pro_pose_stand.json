@@ -1,0 +1,16 @@
+{
+  "arm_left_elbow_joint": 0.45,
+  "arm_left_shoulder_hunch_joint": 0.1,
+  "arm_left_shoulder_pitch_joint": 0.25,
+  "arm_left_shoulder_roll_joint": 0.18,
+  "arm_right_elbow_joint": 0.45,
+  "arm_right_shoulder_hunch_joint": -0.1,
+  "arm_right_shoulder_pitch_joint": 0.25,
+  "arm_right_shoulder_roll_joint": 0.18,
+  "leg_left_ankle_pitch_joint": 0.42,
+  "leg_left_hip_pitch_joint": 0.2,
+  "leg_left_knee_joint": 0.62,
+  "leg_right_ankle_pitch_joint": -0.42,
+  "leg_right_hip_pitch_joint": -0.28,
+  "leg_right_knee_joint": 0.62
+}
